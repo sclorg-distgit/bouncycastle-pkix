@@ -6,7 +6,7 @@
 %global archivever  jdk15on-%(echo %{version}|sed 's|\\\.||')
 Name:          %{?scl_prefix}bouncycastle-pkix
 Version:       1.52
-Release:       4.1%{?dist}
+Release:       4.2%{?dist}
 Summary:       Bouncy Castle PKIX, CMS, EAC, TSP, PKCS, OCSP, CMP, and CRMF APIs
 License:       MIT
 URL:           http://www.bouncycastle.org/
@@ -75,6 +75,8 @@ mkdir -p src/test/org/bouncycastle/dvcs
 mv src/java/org/bouncycastle/dvcs/test src/test/org/bouncycastle/dvcs
 mkdir -p src/test/org/bouncycastle/cert/path
 mv src/java/org/bouncycastle/cert/path/test src/test/org/bouncycastle/cert/path
+mkdir -p src/test/org/bouncycastle/operator
+mv src/java/org/bouncycastle/operator/test src/test/org/bouncycastle/operator/test
 
 cp -p %{SOURCE2} build.xml
 cp -p %{SOURCE3} bcpkix.bnd
@@ -150,6 +152,10 @@ install -pm 644 %{SOURCE1} %{buildroot}%{_mavenpomdir}/JPP-bcpkix.pom
 %doc LICENSE.html
 
 %changelog
+* Wed Apr 06 2016 Mat Booth <mat.booth@redhat.com> - 1.52-4.2
+- Move some tests that were erroneously in the main jar,
+  avoids a runtime dep on junit in OSGi metadata
+
 * Tue Jun 30 2015 Mat Booth <mat.booth@redhat.com> - 1.52-4.1
 - Import latest from Fedora
 
