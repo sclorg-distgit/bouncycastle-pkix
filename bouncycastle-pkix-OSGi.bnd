@@ -1,0 +1,22 @@
+# BND/OSGI Properties by gil
+Import-Package: *
+Export-Package: *
+Bundle-ManifestVersion: 2
+Bundle-Name: bcpkix
+Bundle-SymbolicName: bcpkix
+Bundle-Version: @VERSION@
+Built-By: ${user.name}
+Created-By: ${java.version} (${java.vendor})
+Extension-Name: org.bouncycastle.bcpkix
+Implementation-Vendor: BouncyCastle.org
+Implementation-Vendor-Id: org.bouncycastle
+Implementation-Version: @VERSION@.0
+Originally-Created-By: ${java.version} (${java.vendor})
+Specification-Vendor: BouncyCastle.org
+Specification-Version: 1.1
+Application-Name: Bouncy Castle PKIX API
+Application-Library-Allowable-Codebase: *
+Caller-Allowable-Codebase: *
+Codebase: *
+Permissions: all-permissions
+Trusted-Library: true
