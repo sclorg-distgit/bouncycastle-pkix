@@ -2,7 +2,7 @@
 %{!?scl:%global pkg_name %{name}}
 %{?java_common_find_provides_and_requires}
 
-%global baserelease 2
+%global baserelease 3
 
 %global ver 1.54
 %global archivever  jdk15on-%(echo %{ver}|sed 's|\\\.||')
@@ -22,6 +22,8 @@ Source1:       http://www.bouncycastle.org/download/bctest-%{archivever}.jar
 Source2:       http://central.maven.org/maven2/org/bouncycastle/bcpkix-jdk15on/%{version}/bcpkix-jdk15on-%{version}.pom
 Source3:       bouncycastle-pkix-build.xml
 Source4:       bouncycastle-pkix-OSGi.bnd
+
+Patch0: disabled-mqv-point-compression.patch
 
 BuildRequires: %{?scl_prefix_java_common}ant
 BuildRequires: %{?scl_prefix_java_common}ant-junit
@@ -81,6 +83,8 @@ mv src/java/org/bouncycastle/dvcs/test/* src/test/org/bouncycastle/dvcs/test
 mv src/java/org/bouncycastle/cert/path/test/* src/test/org/bouncycastle/cert/path/test
 mv src/java/org/bouncycastle/operator/test/* src/test/org/bouncycastle/operator/test
 
+%patch0
+
 cp -p %{SOURCE3} build.xml
 cp -p %{SOURCE4} bcpkix.bnd
 sed -i "s|@VERSION@|%{version}|" build.xml bcpkix.bnd
@@ -121,6 +125,9 @@ set -e -x
 %doc LICENSE.html
 
 %changelog
+* Tue Jan 24 2017 Mat Booth <mat.booth@redhat.com> - 1.54-1.3
+- Fix FTBFS due to disabled point compression in bouncycastle
+
 * Mon Jul 25 2016 Mat Booth <mat.booth@redhat.com> - 1.54-1.2
 - Fix bnd tool invocation
 
